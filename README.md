@@ -5,10 +5,10 @@ This project provides an API to retrieve, add, update, and delete books in a col
 
 * GET /books: Retrieves the list of books.
 * POST /add_book: Adds a new book to the collection.
-* GET /books/id/{id}: Retrieves a book by its ID.
+* GET /books/id/{book_id}: Retrieves a book by its ID.
 * GET /books/author/{author}: Retrieves a book by its author.
-* DELETE /books/{id}: Deletes a book by its ID.
-* PUT /books/{id}: Updates a parameter of a book.
+* DELETE /books/{book_id}: Deletes a book by its ID.
+* PUT /books/{book_id}: Updates a parameter of a book.
 
 
 ## Dependencies
@@ -17,6 +17,7 @@ This project has three dependencies that need to be installed using pip:
 `fastapi`
 `uvicorn`
 `pytest`
+`pylint`
 
 To install the dependencies, you can also run the following command:
 `pip install -r requirements.txt`
@@ -47,20 +48,20 @@ The parameters that can be included are:
 * description (optional)
 
 
-## How to access the endpoint GET /books/id/{id} to retrieve a book by its ID
-To retrieve a book by its ID, send a GET request to the /books/id/{id} endpoint. The {id} parameter in the endpoint URL should be replaced with the ID of the book you want to retrieve.
+## How to access the endpoint GET /books/id/{book_id} to retrieve a book by its ID
+To retrieve a book by its ID, send a GET request to the /books/id/{book_id} endpoint. The {book_id} parameter in the endpoint URL should be replaced with the ID of the book you want to retrieve.
 
 
 ## How to access the endpoint GET /books/author/{author} to retrieve a book by its author
 To retrieve a book by its author, send a GET request to the /books/author/{author} endpoint. The {author} parameter in the endpoint URL should be replaced with the name of the author you want to retrieve.
 
 
-## How to access the endpoint DELETE /books/{id} to delete a book by its ID
-To delete a book by its ID, send a DELETE request to the /books/{id} endpoint. The {id} parameter in the endpoint URL should be replaced with the ID of the book you want to delete.
+## How to access the endpoint DELETE /books/{book_id} to delete a book by its ID
+To delete a book by its ID, send a DELETE request to the /books/{book_id} endpoint. The {book_id} parameter in the endpoint URL should be replaced with the ID of the book you want to delete.
 
 
-## How to access the endpoint PUT /books/{id} to update a parameter of a book
-To update a parameter of a book, send a PUT request to the /books/{id} endpoint with a JSON payload containing the updated parameters for the book.
+## How to access the endpoint PUT /books/{book_id} to update a parameter of a book
+To update a parameter of a book, send a PUT request to the /books/{book_id} endpoint with a JSON payload containing the updated parameters for the book.
 
 The parameters that can be included are:
 
@@ -73,7 +74,7 @@ The parameters that can be included are:
 * format 
 * description 
 
-The {id} parameter in the endpoint URL should be replaced with the ID of the book you want to update.
+The {book_id} parameter in the endpoint URL should be replaced with the ID of the book you want to update.
 
 
 ## Running tests
