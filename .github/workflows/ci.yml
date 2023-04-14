@@ -21,4 +21,4 @@ jobs:
       # - name: Run linting checks
       #   run: pylint  --extension-pkg-whitelist='pydantic' api.py
       - name: Run unit tests
-        run: pytest test_api
+        run: pytest test_api.py
