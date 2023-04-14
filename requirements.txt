@@ -3,3 +3,5 @@ uvicorn
 pytest
 pylint
 psycopg2
+httpx
+starlette
