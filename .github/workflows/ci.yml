@@ -1,0 +1,24 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install pylint
+        run: pip install pylint
+      - name: Add pylint to path
+        run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
+      - name: Run linting checks
+        run: pylint  --extension-pkg-whitelist='pydantic' api.py
+      - name: Run unit tests
+        run: pytest test_api
