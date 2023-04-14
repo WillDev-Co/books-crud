@@ -18,6 +18,7 @@ This project has three dependencies that need to be installed using pip:
 `uvicorn`
 `pytest`
 `pylint`
+`psycopg2`
 
 To install the dependencies, you can also run the following command:
 `pip install -r requirements.txt`
@@ -78,11 +79,14 @@ The {book_id} parameter in the endpoint URL should be replaced with the ID of th
 
 
 ## Running tests
-The project includes a test suite to ensure the API is working correctly. To run the tests, run the `test_api.py` file. This will run three tests:
+The project includes a test suite to ensure the API is working correctly. To run the tests, run the `test_api.py` file. This will run the following tests:
 
-`test_get_books`: Tests that the `/books` endpoint returns a list of books.
 `test_add_book`: Tests that the `/add_book` endpoint adds a new book to the collection.
-`test_update_book`: Tests that the `/update_book/{book_id}` endpoint updates an existing book in the collection.
+`test_get_all_books`: Tests that the `/books` endpoint returns a list of books.
+`test_get_book_by_id`: Tests that the `/books/book_id/{book_id}` endpoint retrieves a book by its ID.
+`test_get_book_by_author`: Tests that the `/books/author/{author}` endpoint retrieves books by author.
+`test_update_book`: Tests that the `/books/{book_id}` endpoint updates an existing book in the collection.
+`test_delete_book_by_id`: Tests that the `/books/{book_id}` endpoint deletes a book by its ID.
 
 To run the tests, follow these steps:
 
@@ -93,8 +97,6 @@ To run the tests, follow these steps:
 `pytest test_api.py`
 
 The `pytest` command will run all the tests in the `test_api.py` file. The output will indicate whether each test passed or failed, along with any error messages that were raised.
-
-Make sure to fix any issues before deploying the API.
 
 [![CI](https://github.com/WillDev-co/books-crud/actions/workflows/ci.yml/badge.svg)](https://github.com/WillDev-co/books-crud/actions/workflows/ci.yml)
 

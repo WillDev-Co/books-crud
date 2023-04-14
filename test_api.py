@@ -9,7 +9,7 @@ client = TestClient(app)
 def test_add_book():
     """Adds a new book"""
     new_book = {
-        "id": 1,
+        "book_id": 1,
         "title": "Flamengo",
         "author": "Zico",
         "release_year": 1981,
@@ -29,9 +29,9 @@ def test_get_all_books():
 
 def test_get_book_by_id():
     """Retrieves a book by id"""
-    response = client.get("/books/id/1")
+    response = client.get("/books/book_id/1")
     assert response.status_code == 200
-    assert response.json()["data"]["id"] == 1
+    assert response.json()["data"]["book_id"] == 1
 
 
 def test_get_book_by_author():
@@ -44,7 +44,7 @@ def test_get_book_by_author():
 def test_update_book():
     """Update a book by id"""
     updated_book = {
-        "id": 1,
+        "book_id": 1,
         "title": "Corinthians",
         "author": "Socrates",
         "release_year": 2012,
@@ -53,7 +53,8 @@ def test_update_book():
 
     response = client.put("/books/1", json=updated_book)
     assert response.status_code == 200
-    assert response.json()["message"] == "Book with id 1 updated successfully"
+    assert response.json()[
+        "message"] == "Book with book_id 1 updated successfully"
 
 
 def test_delete_book_by_id():
