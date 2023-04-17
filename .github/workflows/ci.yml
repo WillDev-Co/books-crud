@@ -14,6 +14,7 @@ jobs:
           POSTGRES_DB: books-crud
         ports:
           - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,10 +23,14 @@ jobs:
         with:
           python-version: 3.9
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
       - name: Add pylint to path
         run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
       - name: Run linting checks
         run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
       - name: Run unit tests
+        env:
+          DATABASE_URL: postgres://user:password@localhost:5432/books-crud
         run: pytest test_api.py
