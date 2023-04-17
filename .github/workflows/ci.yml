@@ -23,9 +23,7 @@ jobs:
         with:
           python-version: 3.9
       - name: Install dependencies
-        run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Add pylint to path
         run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
       - name: Run linting checks
