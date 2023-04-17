@@ -29,9 +29,13 @@ jobs:
       - name: Run linting checks
         run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
       - name: Check PostgreSQL logs
-        run: docker logs 994418d5d1b9
+        run: docker logs postgres
       - name: Print DATABASE_URL
         run: echo $DATABASE_URL
+      - name: Run database migration
+        env:
+          DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable
+        run: alembic upgrade head
       - name: Run unit tests
         env:
           DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable

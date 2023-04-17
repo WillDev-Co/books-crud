@@ -5,3 +5,4 @@ pylint
 psycopg2
 httpx
 starlette
+alembic
