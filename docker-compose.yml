@@ -2,12 +2,14 @@ version: '3'
 
 services:
   db:
-    image: books-crud-db
+
+    image: postgres:15-alpine
     ports:
       - "5432:5432"
-  api:
-    build: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: books-crud
+      port: 5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

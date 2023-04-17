@@ -28,8 +28,8 @@ class Book(BaseModel):
 
 
 try:
-    conn = psycopg2.connect(host='172.17.0.2', database='books-crud',
-                            user='postgres', password='Password1234', cursor_factory=RealDictCursor)
+    conn = psycopg2.connect(host='localhost', database='books-crud',
+                            user='user', password='password', cursor_factory=RealDictCursor)
     cursor = conn.cursor()
     print('Database connection was succesfull!')
 except psycopg2.Error as error:
