@@ -28,10 +28,6 @@ jobs:
         run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
       - name: Run linting checks
         run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
-      - name: Check PostgreSQL logs
-        run: docker logs postgres
-      - name: Print DATABASE_URL
-        run: echo $DATABASE_URL
       - name: Run database migration
         env:
           DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable
