@@ -29,7 +29,7 @@ jobs:
       - name: Run linting checks
         run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
       - name: Check PostgreSQL logs
-        run: docker logs postgres
+        run: docker logs books-crud_db_1
       - name: Print DATABASE_URL
         run: echo $DATABASE_URL
       - name: Run unit tests
