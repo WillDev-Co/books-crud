@@ -29,6 +29,6 @@ jobs:
       - name: Run linting checks
         run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
       - name: Run migrations
-        run: psql -f db/migrations/init.sql postgresql://user:password\@localhost:5432/books-crud\?sslmode=disable
+        run: psql -f init.sql postgresql://user:password\@localhost:5432/books-crud\?sslmode=disable
       - name: Run unit tests
         run: pytest test_api.py
