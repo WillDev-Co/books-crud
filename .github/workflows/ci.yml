@@ -35,5 +35,5 @@ jobs:
           POSTGRES_HOST: postgres
       - name: Run unit tests
         env:
-          DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable
+          DATABASE_URL: postgresql://user:password\@localhost:5432/books-crud\?sslmode=disable
         run: pytest test_api.py

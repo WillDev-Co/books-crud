@@ -7,4 +7,3 @@ httpx
 starlette
 alembic==1.7.4
 sqlalchemy
-psycopg2-binary==2.9.3
