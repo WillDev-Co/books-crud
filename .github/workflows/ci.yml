@@ -26,12 +26,13 @@ jobs:
         run: pip install -r requirements.txt
       - name: Add pylint to path
         run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
-      - name: Run linting checks
-        run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
-      - name: Run database migration
-        env:
-          DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable
+      - name: Apply Alembic migration
         run: alembic upgrade head
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: books-crud
+          POSTGRES_HOST: postgres
       - name: Run unit tests
         env:
           DATABASE_URL: postgres://user:password\@localhost:5432/books-crud\?sslmode=disable

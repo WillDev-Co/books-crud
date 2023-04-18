@@ -1,7 +1,7 @@
 """System modules"""
 from fastapi.testclient import TestClient
 from api import app
-
+from sqlalchemy.dialects: pstgrees
 
 client = TestClient(app)
 
