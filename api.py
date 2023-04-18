@@ -1,9 +1,11 @@
 """System modules."""
 from typing import Optional
 from psycopg2.extras import RealDictCursor
-import psycopg2
+# import psycopg2
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, status
+from sqlalchemy.dialects.postgresql import psycopg2
+
 
 # pylint: disable = too-few-public-methods
 
