@@ -1,9 +1,10 @@
 """System modules"""
 import random
 import string
+import uuid
 from fastapi.testclient import TestClient
 from api import app, cursor, conn, uuid4
-import uuid
+
 
 client = TestClient(app)
 

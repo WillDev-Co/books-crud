@@ -45,17 +45,16 @@ def add_book(payload: models.CreateBookRequest):
     except Exception as e:
         conn.rollback()
 
-        # Check if error is because of duplicate isbn
         if "duplicate key value violates unique constraint" in str(e):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"isbn: {book.isbn} already exists"
-            )
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error: {e}"
-            )
+        ) from e
+
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error: {e}"
+    ) from e
 
     # Return book inside data
     return book
@@ -72,7 +71,7 @@ def get_books():
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error: {e}"
-        )
+        ) from e
 
     return {
         "data": books
@@ -97,7 +96,7 @@ def get_book_by_id(id: str):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error: {e}"
-        )
+        ) from e
 
     return {"data": book}
 
@@ -115,7 +114,7 @@ def get_book_by_author(author: str):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error: {e}"
-        )
+        ) from e
 
     return {"data": books}
 
@@ -136,7 +135,7 @@ def del_book_by_id(id: str):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error: {e}"
-        )
+        ) from e
 
     return {"message": f"Book with id: {id} was successfully deleted!"}
 
@@ -180,4 +179,4 @@ def update_book(id: str, payload: models.UpdateBookRequest):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error: {e}"
-        )
+        ) from e
