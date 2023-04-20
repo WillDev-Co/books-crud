@@ -1,0 +1,9 @@
+fastapi 
+uvicorn
+pytest
+pylint
+psycopg2
+httpx
+starlette
+alembic==1.7.4
+sqlalchemy
