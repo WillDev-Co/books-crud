@@ -1,0 +1,34 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: books-crud
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Add pylint to path
+        run: echo "$PATH" | grep -q "$HOME/.local/bin" || echo 'export PATH=$HOME/.local/bin:$PATH' >> $GITHUB_ENV
+      - name: Run linting checks
+        run: pylint --ignored-modules=pydantic --extension-pkg-allow-list=pydantic api.py
+      - name: Run migrations
+        run: psql -f init.sql postgresql://user:password\@localhost:5432/books-crud\?sslmode=disable
+      - name: Run unit tests
+        run: pytest test_api.py
